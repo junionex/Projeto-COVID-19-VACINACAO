@@ -1,6 +1,7 @@
 import requests 
 from requests.auth import HTTPBasicAuth
 import json
+import ModelVacinacao
 
 
 url = "https://imunizacao-es.saude.gov.br/_search"
@@ -50,11 +51,20 @@ def imprimirPorPaginacao(vacina):
     valores = vacina['hits']['hits']
     ultimo = ""
     global contador
+    
+
     for i in valores:
         print((str(contador)+"-")+i['_source']['paciente_endereco_nmMunicipio'] +(str("----")) +i['_source']['@timestamp'] )
+        document = ModelVacinacao
+        conexao = document.getPegarConexao()
+        pahfechar = document.getPegarOConn()
+        document.addPaciente(conexao, i['_source']['@timestamp'], i['_source']['paciente_idade'], i['_source']['paciente_endereco_nmMunicipio'],i['_source']['vacina_descricao_dose'], i['_source']['vacina_fabricante_nome'], i['_source']['vacina_categoria_nome'], i['_source']['vacina_nome'], i['_source']['paciente_enumSexoBiologico'],i['_source']['document_id'])
+        document.fecharConexao(pahfechar,conexao)
         contador += 1
         ultimo = i['_source']['@timestamp']
     print("ultimo = " + ultimo)
+    
+    
     return ultimo
 
 ######################-----CODIGO------##############################
@@ -68,6 +78,8 @@ while(f == 1):
     vacina = resposta.json()
     ultimo = imprimirPorPaginacao(vacina)
     resposta = paginacao(ultimo)
+    #print(resposta)
+    #f += 1
 #print (vacina['hits']['hits'])
 
 
