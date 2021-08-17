@@ -1,0 +1,9 @@
+https://www.youtube.com/watch?v=XXxdP3UlGIs
+
+###O DE CEP
+https://viacep.com.br/ws/"+cep+"/json/
+
+###TENTA CONSUMIR O DO DATASUS AGORA
+https://imunizacao-es.saude.gov.br/_search/
+
+python -m pip install requests
