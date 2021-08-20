@@ -5,7 +5,7 @@ import ModelVacinacao
 
 
 url = "https://imunizacao-es.saude.gov.br/_search"
-contador = 0
+contador = 1920000
 
 #Páginação de 5k
 def requisicao():
@@ -51,8 +51,6 @@ def imprimirPorPaginacao(vacina):
     valores = vacina['hits']['hits']
     ultimo = ""
     global contador
-    
-
     for i in valores:
         print((str(contador)+"-")+i['_source']['paciente_endereco_nmMunicipio'] +(str("----")) +i['_source']['@timestamp'] )
         document = ModelVacinacao
@@ -62,9 +60,9 @@ def imprimirPorPaginacao(vacina):
         document.fecharConexao(pahfechar,conexao)
         contador += 1
         ultimo = i['_source']['@timestamp']
-    print("ultimo = " + ultimo)
-    
-    
+        sortUltimo = i['sort']
+    print("ultimo = " + ultimo + "---sort: " + str(sortUltimo))
+
     return ultimo
 
 ######################-----CODIGO------##############################
@@ -75,16 +73,16 @@ def imprimirPorPaginacao(vacina):
 resposta = requisicao()
 f = 1
 while(f == 1):
-    vacina = resposta.json()
-    ultimo = imprimirPorPaginacao(vacina)
-    resposta = paginacao(ultimo)
-    #print(resposta)
-    #f += 1
-#print (vacina['hits']['hits'])
+    if(resposta.status_code == 200):
+        print('resultado é 200')
+        vacina = resposta.json()
+        ultimo = imprimirPorPaginacao(vacina)
+        resposta = paginacao(ultimo)
+    else:
+        print("----------------------")
+        print(resposta.status_code)
+        f = 2
 
-
-
-#print (valores[0]['_source']['paciente_endereco_nmMunicipio'])
 
 
    

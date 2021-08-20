@@ -29,6 +29,34 @@ def addPaciente(cursor,timestamp, paciente_idade, paciente_endereco_nmMunicipio,
     cursor.execute("INSERT INTO documento (timestamp, paciente_idade, paciente_endereco_nmMunicipio, vacina_descricao_dose, vacina_fabricante_nome, vacina_categoria_nome, vacina_nome,paciente_enumSexoBiologico, id) VALUES (%s,%s, %s,%s,%s,%s,%s,%s,%s);", (timestamp, paciente_idade, paciente_endereco_nmMunicipio, vacina_descricao_dose, vacina_fabricante_nome, vacina_categoria_nome, vacina_nome,paciente_enumSexoBiologico, id))
     print('adicionado --'+ timestamp + str("--" +id))
 
+def selecionarTotalCadastrado():
+    cursor.execute("SELECT COUNT(*) FROM documento")
+    rows = cursor.fetchall()
+    return rows
+def selecionarPorSexoMasculino():
+    cursor.execute("SELECT COUNT(*) FROM documento WHERE paciente_enumSexoBiologico = 'M'")
+    rows = cursor.fetchall()
+    return rows
+def selecionarPorSexoFeminino():
+    cursor.execute("SELECT COUNT(*) FROM documento WHERE paciente_enumSexoBiologico = 'F'")
+    rows = cursor.fetchall()
+    return rows
+def selecionarPorCidade(cidade):
+    cursor.execute("SELECT COUNT(*) FROM documento WHERE paciente_endereco_nmMunicipio ='"+cidade+"';")
+    rows = cursor.fetchall()
+    return rows
+def selecionarPorIdade18a24():
+    cursor.execute("SELECT COUNT(*) FROM documento WHERE paciente_idade >= 18 and paciente_idade <= 24")
+    rows = cursor.fetchall()
+    return rows
+def selecionarPorIdade25a60():
+    cursor.execute("SELECT COUNT(*) FROM documento WHERE paciente_idade >= 25 and paciente_idade <= 60")
+    rows = cursor.fetchall()
+    return rows
+def selecionarPorIdadeMaiorQue61():
+    cursor.execute("SELECT COUNT(*) FROM documento WHERE paciente_idade >= 61")
+    rows = cursor.fetchall()
+    return rows
 
     #criarTabela()
 def getPegarConexao():
