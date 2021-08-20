@@ -57,6 +57,14 @@ def selecionarPorIdadeMaiorQue61():
     cursor.execute("SELECT COUNT(*) FROM documento WHERE paciente_idade >= 61")
     rows = cursor.fetchall()
     return rows
+def selecionarPrimeiraDose():
+    cursor.execute("SELECT COUNT(*) FROM documento WHERE vacina_descricao_dose = '1ª Dose'")
+    rows = cursor.fetchall()
+    return rows
+def selecionarSegundaDose():
+    cursor.execute("SELECT COUNT(*) FROM documento WHERE vacina_descricao_dose = '2ª Dose'")
+    rows = cursor.fetchall()
+    return rows
 
     #criarTabela()
 def getPegarConexao():
