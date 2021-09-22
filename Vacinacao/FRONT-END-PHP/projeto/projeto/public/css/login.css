@@ -1,0 +1,51 @@
+@import url('https://fonts.google.com/specimen/Roboto');
+body {
+	background-color: white;
+}
+
+.title {
+  float: left;
+  margin-left: 50px;
+	font-family: "Arial";
+	text-align: center;
+	color: #FFF;
+	display: block;
+	align-items: center;
+	justify-content: center;
+	height: 90vh;
+	letter-spacing: 1px;
+  font-style: oblique;
+ 
+  
+}
+
+h1 {
+	background-image: url(https://media.giphy.com/media/MCAFTO4btHOaiNRO1k/giphy.gif);
+	background-size: cover;
+	color: transparent;
+	-moz-background-clip: text;
+	-webkit-background-clip: text;
+	background-color: #FFF;
+	font-size: 100px;
+	line-height: .75;
+	margin: 10px 0;
+}
+/* styling my button */
+
+.white-mode {
+	text-decoration: none;
+	padding: 7px 10px;
+	background-color: #122;
+	border-radius: 3px;
+	color: #FFF;
+	transition: .35s ease-in-out ;
+	position: absolute;
+	left: 15px;
+	bottom: 15px;
+	font-family: "Arial";
+}
+
+.white-mode:hover {
+	background-color: #FFF;
+	color: #122;
+}
